@@ -1,8 +1,156 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="PostIt">
 <head>
+<meta charset="utf-8" />
+<title>Sticky notes using CSS3 and Google Fonts (Step 5)</title>
+<link  href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css"> 
+<script src="http://code.jquery.com/jquery-latest.min.js"
+        type="text/javascript"></script>
+<style type="text/css">
+*{
+  margin:0;
+  padding:0;
+}
+body{
+  font-family:arial,sans-serif;
+  font-size:100%;
+  margin:3em;
+  background:#666;
+  color:#fff;
+}
+h2,p{
+  font-size:100%;
+  font-weight:normal;
+}
+ul,li{
+  list-style:none;
+}
+ul{
+  overflow:hidden;
+  padding:3em;
+}
+ul li a{
+  text-decoration:none;
+  color:#000;
+  background:#ffc;
+  display:block;
+  height:10em;
+  width:10em;
+  padding:1em;
+  -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  -moz-transition:-moz-transform .15s linear;
+  -o-transition:-o-transform .15s linear;
+  -webkit-transition:-webkit-transform .15s linear;
+}
+ul li{
+  margin:1em;
+  float:left;
+}
+ul li h2{
+  font-size:140%;
+  font-weight:bold;
+  padding-bottom:10px;
+}
+ul li p{
+  font-family:"Reenie Beanie",arial,sans-serif;
+  font-size:180%;
+}
+/*ul li a{
+  -webkit-transform: rotate(-6deg);
+  -o-transform: rotate(-6deg);
+  -moz-transform:rotate(-6deg);
+}
+ul li:nth-child(even) a{
+  -o-transform:rotate(4deg);
+  -webkit-transform:rotate(4deg);
+  -moz-transform:rotate(4deg);
+  position:relative;
+  top:5px;
+  background:#cfc;
+}
+ul li:nth-child(3n) a{
+  -o-transform:rotate(-3deg);
+  -webkit-transform:rotate(-3deg);
+  -moz-transform:rotate(-3deg);
+  position:relative;
+  top:-5px;
+  background:#ccf;
+}
+ul li:nth-child(5n) a{
+  -o-transform:rotate(5deg);
+  -webkit-transform:rotate(5deg);
+  -moz-transform:rotate(5deg);
+  position:relative;
+  top:-10px;
+}
+ul li a:hover,ul li a:focus{
+  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  position:relative;
+  z-index:5;
+}*/
+ol{text-align:center;}
+ol li{display:inline;padding-right:1em;}
+ol li a{color:#fff;}
+</style>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular.min.js"></script>
+
 </head>
-<body>
-<p> This is something </p>
+<body ng-controller="PostItController">
+  <ul>
+    <li ng-repeat="note in notes">
+      <a id="{{ 'object-' + $index }}" ng-show="showme" ng-click="showme = false ; funtion()">
+        <h2>{{note.title}}</h2>
+        <p>{{note.content}}</p>
+      </a>
+    </li>
+  </ul>
 </body>
+
+
+<script>
+
+var app = angular.module("PostIt", []);
+
+app.controller("PostItController", function($scope){
+
+  $scope.notes =[{name: "abc", title: "one", content: "This is one"}, {name: "def", title: "one", content: "This is one"},{name: "hik", title: "one", content: "This is one"},{name: "lmn", title: "one", content: "This is one"},{name: "opq", title: "one", content: "This is one"},{name: "rst", title: "one", content: "This is one"},{name: "wxy", title: "one", content: "This is one"},{name: "zab", title: "one", content: "This is one"}
+  ];
+  $scope.showme = true;
+
+  addEventListener('load', load, false);
+
+
+  var load = function (){
+     var myNum = 0;
+     for(thing in $scope.notes){
+      $("#object-" + myNum).css("position", "absolute");
+      $("#object-" + myNum).css("margin-top", Math.floor(Math.random() * (1000 - 10 + 1)) + 10);
+      $("#object-" + myNum).css("margin-left", Math.floor(Math.random() * (1000 - 10 + 1)) + 10);
+      myNum += 1;
+    }
+
+  /*   for(thing in $scope.notes){
+      console.log("asgasdj");
+    var element = document.getElementById(thing.name);
+      element.style.zIndex = Math.floor(Math.random() * 10) + 1;
+      element.style.position = "absolute";
+      element.style.marginTop = Math.floor(Math.random() * (1000 - 10 + 1)) + 10;
+      element.style.marginLeft = Math.floor(Math.random() * (2000 - 10 + 1)) + 10;*/
+
+
+//Math.floor(Math.random() * (max - min + 1)) + min;
+
+
+  };
+});
+
+</script>
+
 </html>
